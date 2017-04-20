@@ -17,7 +17,7 @@ for pagegen in site.random(0, limit=20):
     page = site.pages[pageTitle]
     text = page.text()
     oldtext = text
-    match = re.findall(r"(\[\[.+]]|\[\[.+\|.+]])", text)
+    match = re.findall(r"(\[\[\w+]]|\[\[\w+\|\w+]])", text)
 
     for link in match:
         if link == "[["+pageTitle+ "]]":
