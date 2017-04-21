@@ -28,7 +28,7 @@ for pagegen in site.random(0, limit=20):
             text = text.replace("[["+pageTitle+"]]",pageTitle)
         elif "|" in link:
             par = link.split("|")
-            if par[0] == pageTitle:
+            if par[0][2:] == pageTitle:
                 par[1] = par[1][0:-2]
                 text = text.replace(link,par[1])
 
