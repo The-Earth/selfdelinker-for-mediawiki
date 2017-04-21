@@ -16,6 +16,9 @@ while True:
 for pagegen in site.random(0, limit=20):
     pageTitle = pagegen["title"]
     page = site.pages[pageTitle]
+    if not page.can("edit"):
+        continue
+    
     text = page.text()
     oldtext = text
     match = re.findall(reg, text)
