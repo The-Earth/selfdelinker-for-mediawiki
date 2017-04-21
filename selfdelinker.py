@@ -3,6 +3,7 @@ import re
 import time
 
 site = mwclient.Site("zh.wikipedia.org")
+reg = r"(\[\[\w+]]|\[\[\w+\|\w+]]|\[\[\w+\s\(\w+\)|\[\[\w+\s\(\w+\)\|\w+]])"
 
 while True:
     try:
@@ -17,7 +18,7 @@ for pagegen in site.random(0, limit=20):
     page = site.pages[pageTitle]
     text = page.text()
     oldtext = text
-    match = re.findall(r"(\[\[\w+]]|\[\[\w+\|\w+]])", text)
+    match = re.findall(reg, text)
 
     for link in match:
         if link == "[["+pageTitle+ "]]":
