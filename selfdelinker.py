@@ -3,7 +3,7 @@ import re
 import time
 
 site = mwclient.Site("zh.wikipedia.org")
-reg = r"(\[\[\w+]]|\[\[\w+\|\w+]]|\[\[\w+\s\(\w+\)]]|\[\[\w+\s\(\w+\)\|\w+]])"
+reg = re.compile(r'\[\[\s*:?(.*?)(\|[\s\S]*?)?]]')
 
 while True:
     try:
@@ -21,17 +21,14 @@ for pagegen in site.random(0, limit=20):
 
     text = page.text()
     oldtext = text
-    match = re.findall(reg, text)
 
-    for link in match:
-        if link == "[[" + pageTitle + "]]":
-            text = text.replace(link, pageTitle)
-            continue
-        elif "|" in link:
-            par = link.split("|")
-            if par[0][2:] == pageTitle:
-                par[1] = par[1][0:-2]
-                text = text.replace(link, par[1])
+    for link in reg.finditer(text):
+        if link.group(1).strip() == pageTitle:
+            if link.group(2) and link.group(2) != '|':
+                showText = link.group(2)
+            else:
+                showText = pageTitle
+            text = text.replace(link.group(0), showText)
 
     if oldtext != text:
         page.save(text, "机器人：移除指向自身的链接", minor=True)
