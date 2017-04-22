@@ -4,7 +4,7 @@ import time
 
 site = mwclient.Site("zh.wikipedia.org")
 reg = r"(\[\[\w+]]|\[\[\w+\|\w+]]|\[\[\w+\s\(\w+\)]]|\[\[\w+\s\(\w+\)\|\w+]])"
-tagNeed = False
+tagNeed,num1,num2 = False,0,0
 
 while True:
     try:
