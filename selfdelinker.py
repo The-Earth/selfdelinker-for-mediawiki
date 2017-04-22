@@ -18,23 +18,24 @@ for pagegen in site.random(0, limit=20):
     page = site.pages[pageTitle]
     if not page.can("edit"):
         continue
-    
+
     text = page.text()
     oldtext = text
     match = re.findall(reg, text)
 
     for link in match:
-        if link == "[["+pageTitle+ "]]":
-            text = text.replace("[["+pageTitle+"]]",pageTitle)
+        if link == "[[" + pageTitle + "]]":
+            text = text.replace(link, pageTitle)
+            continue
         elif "|" in link:
             par = link.split("|")
             if par[0][2:] == pageTitle:
                 par[1] = par[1][0:-2]
-                text = text.replace(link,par[1])
+                text = text.replace(link, par[1])
 
     if oldtext != text:
-        page.save(text,"机器人：移除指向自身的链接",minor=True)
-        print(pageTitle+" delinked.")
+        page.save(text, "机器人：移除指向自身的链接", minor=True)
+        print(pageTitle + " delinked.")
     else:
-        print("No edit is needed in "+pageTitle)
+        print("No edit is needed in " + pageTitle)
     time.sleep(1)
