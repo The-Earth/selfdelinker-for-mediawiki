@@ -34,9 +34,9 @@ for pagegen in site.random(0, limit=20):
 
     if tagNeed:
         with open("selflinklist.txt","a") as log:
-            log.write("#[["+pageTitle+"]]，str(num1)+个<nowiki>[[title]]<nowiki>，+str(num2)+个<nowiki>[[title|text]]</nowiki>\n")
+            log.write("#[["+pageTitle+"]]"+str(num1)+"个<nowiki>[[title]]<nowiki>，"+str(num2)+"个<nowiki>[[title|text]]</nowiki>\n")
         print(pageTitle + " tagged.")
         tagNeed = False
     else:
         print("No selflinks in " + pageTitle)
-    time.sleep(1)
+    #time.sleep(1)
