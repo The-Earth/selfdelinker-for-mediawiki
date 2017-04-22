@@ -39,4 +39,4 @@ for pagegen in site.random(0, limit=20):
         tagNeed = False
     else:
         print("No selflinks in " + pageTitle)
-    #time.sleep(1)
+    time.sleep(1)
