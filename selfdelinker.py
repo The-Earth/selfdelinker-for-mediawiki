@@ -13,9 +13,8 @@ while True:
     except mwclient.errors.LoginError:
         print("Password Error. Try again.")
 
-for pagegen in site.random(0, limit=20):
-    pageTitle = pagegen["title"]
-    page = site.pages[pageTitle]
+for page in site.allpages(namespace = "0"):
+    pageTitle = page.name
     if not page.can("edit"):
         continue
 
