@@ -1,23 +1,24 @@
 import mwclient
 import re
 import time
+from getpass import getpass
 
 site = mwclient.Site("zh.wikipedia.org")
 reg = re.compile(r'\[\[\s*:?(.*?)(\|[\s\S]*?)?]]')
 
 while True:
     try:
-        pwd = input("Password?")
+        pwd = getpass("Password?")
         site.login("Tiger-bot", pwd)
         break
     except mwclient.errors.LoginError:
         print("Password Error. Try again.")
 
-for page in site.allpages(namespace = "0"):
-    pageTitle = page.name
+for page in site.allpages(namespace = "0",filterredir='nonredirects'):
     if not page.can("edit"):
         continue
-
+    
+    pageTitle = page.name
     text = page.text()
     oldtext = text
 
