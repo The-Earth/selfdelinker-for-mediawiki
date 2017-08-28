@@ -9,6 +9,6 @@
 - 无法识别通过重定向指向自身的链接。
 
 ## 脚本
-- selfdelinker.py 自动检测并修正自链接（目前未启用）
+- selfdelinker.py 自动检测并修正自链接
 - selflinktagger.py 检测并在本地记录存在自链接的页面
 - loguploader.py 将本地记录上传至用户页
